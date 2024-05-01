@@ -15,7 +15,7 @@ pipeline{
     parameters {
         choice(name: 'action', choices: ['apply', 'destroy', ], description: 'Pick something')
     }
-   
+//    build
         stages {
             stage ('init') {
                 steps {
@@ -37,7 +37,7 @@ pipeline{
             stage ('deploy') {
                  when {
                    expression {
-                    "${params.action}" == 'apply' || "${params.action}" == 'destroy'
+                    "${params.action}" == 'apply' 
                     
                 }
     }
@@ -53,7 +53,33 @@ pipeline{
                 steps {
                     sh """
                         cd 01-vpc
-                        terraform apply -auto-approve || terraform destroy -auto-approve
+                        terraform apply -auto-approve 
+                    """
+            }
+        }
+
+       // destroy
+
+       stage ('destory') {
+                 when {
+                   expression {
+                    "${params.action}" == 'destroy' 
+                    
+                }
+    }
+
+                input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                // submitter "alice,bob"
+                // parameters {
+                //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                // }
+            }
+                steps {
+                    sh """
+                        cd 01-vpc
+                        terraform destrory -auto-approve 
                     """
             }
         }
