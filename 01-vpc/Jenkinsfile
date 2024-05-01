@@ -60,7 +60,7 @@ pipeline{
 
        // destroy
 
-       stage ('destory') {
+       stage ('destroy') {
                  when {
                    expression {
                     "${params.action}" == 'destroy' 
@@ -79,7 +79,7 @@ pipeline{
                 steps {
                     sh """
                         cd 01-vpc
-                        terraform destrory -auto-approve 
+                        terraform destroy -auto-approve 
                     """
             }
         }
