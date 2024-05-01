@@ -12,6 +12,9 @@ pipeline{
         disableConcurrentBuilds()
         
     }
+    parameters {
+        choice(name: 'action', choices: ['apply', 'destroy', ], description: 'Pick something')
+    }
    
         stages {
             stage ('init') {
@@ -32,6 +35,13 @@ pipeline{
         }
 
             stage ('deploy') {
+                 when {
+                   expression {
+                    "${params.action}" == 'apply' || "${params.action}" == 'destroy'
+                    
+                }
+    }
+
                 input {
                 message "Should we continue?"
                 ok "Yes, we should."
@@ -43,7 +53,7 @@ pipeline{
                 steps {
                     sh """
                         cd 01-vpc
-                        terraform apply -auto-approve
+                        terraform apply -auto-approve || terraform destroy -auto-approve
                     """
             }
         }
