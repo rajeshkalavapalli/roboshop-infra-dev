@@ -127,6 +127,16 @@ module "app_alb" {
   #sg_ingress_rules = var.momgodb_sg_ingress_rules
 
 }
+#app alb sould accept connections only from vpn 
+resource "aws_security_group_rule" "app_alb_vpn" { #vpn accepting from home 
+  source_security_group_id = module.vpn.sg_id
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "-1"
+  security_group_id = module.app_alb.sg_id
+}
+
 
 #creating sg for vpn 
 resource "aws_security_group_rule" "vpn_home" { #vpn accepting from home 
