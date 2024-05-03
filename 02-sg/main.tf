@@ -127,9 +127,41 @@ module "app_alb" {
   #sg_ingress_rules = var.momgodb_sg_ingress_rules
 
 }
+
+module "web_alb" {
+  source = "../../terraform_aws_sg"
+  project_name = var.project_name
+  environment = var.environment
+  sg_description = "sg for web alb"
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  sg_name = "web-alb"
+  #sg_ingress_rules = var.momgodb_sg_ingress_rules
+
+}
+
+#app alb sould accept connections  from web 
+resource "aws_security_group_rule" "web_alb_internet" { #vpn accepting from home 
+  cidr_blocks = [ "0.0.0.0/0" ]
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = module.web_alb.sg_id
+}
+
 #app alb sould accept connections only from vpn 
 resource "aws_security_group_rule" "app_alb_vpn" { #vpn accepting from home 
   source_security_group_id = module.vpn.sg_id
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = module.app_alb.sg_id
+}
+
+#app alb sould accept connections  from web  
+resource "aws_security_group_rule" "app_alb_web" { #vpn accepting from home 
+  source_security_group_id = module.web.sg_id
   type              = "ingress"
   from_port         = 80
   to_port           = 80
