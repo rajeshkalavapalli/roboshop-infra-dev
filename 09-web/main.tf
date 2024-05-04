@@ -1,6 +1,6 @@
 resource "aws_lb_target_group" "web" {
   name     = "${local.name}-${var.tags.component}" 
-  port     = 8080
+  port     = 80
   protocol = "HTTP"
   vpc_id   = data.aws_ssm_parameter.vpc_id.value
   deregistration_delay = 60
