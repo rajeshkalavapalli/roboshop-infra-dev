@@ -1,102 +1,66 @@
 pipeline{
     agent {
         node {
-            label 'AGENT-1'
+            label 'AGENT'
             
         }
 }
+    // environment { 
+    //     GREETING = 'good morning'
+    // }
 
     options {
-        ansiColor('xterm')
         timeout(time: 1, unit: 'HOURS') 
         disableConcurrentBuilds()
-        
     }
-    parameters {
-        choice(name: 'action', choices: ['apply', 'destroy', ], description: 'Pick something')
-    }
-//    build
-        stages {
-            stage ('init') {
-                steps {
-                    sh """
-                        cd 01-vpc
-                        terraform init -reconfigure
-                    """
-            }
-        }
-            stage ('plan') {
-                steps {
-                    sh """
-                        cd 01-vpc
-                        terraform plan
-                    """
-            }
-        }
+    // parameters {
+    //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 
-            stage ('deploy') {
-                 when {
-                   expression {
-                    "${params.action}" == 'apply' 
-                    
-                }
-    }
+    //     text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
 
-                input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                // submitter "alice,bob"
-                // parameters {
-                //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                // }
-            }
-                steps {
-                    sh """
-                        cd 01-vpc
-                        terraform apply -auto-approve 
-                    """
-            }
-        }
+    //     booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
 
-       // destroy
+    //     choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
 
-       stage ('destroy') {
-                 when {
-                   expression {
-                    "${params.action}" == 'destroy' 
-                    
-                }
-    }
+    //     password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    // }
 
-                input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                // submitter "alice,bob"
-                // parameters {
-                //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                // }
-            }
-                steps {
-                    sh """
-                        cd 01-vpc
-                        terraform destroy -auto-approve 
-                    """
-            }
-        }
-
-        stage ('params') {
+    stages {
+       
+        stage ('init') {
+            
             steps {
                 sh """
-                echo "Hello ${params.PERSON}"
+                    cd 01-vpc
+                    terraform init -reconfigure
 
-                echo "Choice: ${params.CHOICE}"
-
-                echo "Password: ${params.PASSWORD}"
-                
-                echo "Toggle": ${params.TOGGLE}
                 """
             }
         }
+        stage ('build') {
+            steps {
+                sh """
+                    cd 01-vpc   
+                    terraform plan 
+                """
+            }
+        }
+        stage ('deploye') {
+            steps {
+                 input {
+                        message "Should we continue?"
+                        ok "Yes, we should."
+                //         submitter "Rajesh"
+                //         parameters {
+                //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                // }
+                sh """
+                    cd 01-vpc 
+                     terraform apply -auto-approve 
+                """
+            }
+        }
+
         
     }
     post { 
