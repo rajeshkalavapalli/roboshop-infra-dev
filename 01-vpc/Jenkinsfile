@@ -43,7 +43,6 @@ pipeline{
              when {
                 expression {
                     ${params.action} == 'apply'
-                    ${params.action} == 'destroy'
                 }
             }
               input {
@@ -62,6 +61,38 @@ pipeline{
                 """
             }
         }
+        
+
+        
+    }
+
+    // destroy
+
+    stages {
+
+        stage ('deploye') {
+             when {
+                expression {
+                    ${params.action} == 'destroy'
+                }
+            }
+              input {
+                    message "Should we continue?"
+                    ok "Yes, we should."
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+
+            }
+            steps {
+                sh """
+                    cd 01-vpc
+                    terraform destroy -auto-approve
+                
+                """
+            }
+        }
+        
 
         
     }
