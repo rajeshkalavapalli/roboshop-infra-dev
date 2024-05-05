@@ -160,7 +160,7 @@ resource "null_resource" "mysql" {
     # Bootstrap script called with private_ip of each node in the cluster
     inline = [
       "chmod +x /tmp/bootstrap.sh",
-      "sudo sh /tmp/bootstrap.sh mysql DEV"
+      "sudo sh /tmp/bootstrap.sh mysql dev"
     ]
   }
 }
@@ -218,7 +218,7 @@ resource "null_resource" "rabbitmq" {
     # Bootstrap script called with private_ip of each node in the cluster
     inline = [
       "chmod +x /tmp/bootstrap.sh",
-      "sudo sh /tmp/bootstrap.sh rabbitmq DEV"
+      "sudo sh /tmp/bootstrap.sh rabbitmq dev"
     ]
   }
 }

@@ -52,10 +52,10 @@ resource "aws_ssm_parameter" "shipping_sg_id" {
   value = module.shipping.sg_id
 }
 
-resource "aws_ssm_parameter" "payments_sg_id" {
-  name  = "/${var.project_name}/${var.environment}/payments_sg_id"
+resource "aws_ssm_parameter" "payment_sg_id" {
+  name  = "/${var.project_name}/${var.environment}/payment_sg_id"
   type  = "String"
-  value = module.payments.sg_id
+  value = module.payment.sg_id
 }
 
 resource "aws_ssm_parameter" "web_sg_id" {

@@ -6,7 +6,11 @@ variable "common_tags" {
   }
 }
 
-
+variable "tags" {
+  default = {
+    component = "shipping"
+  }
+}
 variable "project_name" {
     type = string
     default = "ROBOSHOP"
@@ -25,4 +29,8 @@ variable "environment" {
 
 variable "zone_name" {
   default = "bigmatrix.in"
+}
+
+variable "iam_instance_profile" {
+  default = "ec2shell"
 }

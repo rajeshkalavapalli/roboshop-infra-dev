@@ -22,7 +22,7 @@ variable "project_name" {
 }
 
 variable "environment" {
-  default = "DEV"
+  default = "dev"
 }
 
 # variable "enable_dns_hostnames" {

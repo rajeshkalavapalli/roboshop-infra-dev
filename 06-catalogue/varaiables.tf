@@ -18,7 +18,7 @@ variable "project_name" {
 }
 
 variable "environment" {
-  default = "DEV"
+  default = "dev"
 }
 
 # variable "instance_type" {

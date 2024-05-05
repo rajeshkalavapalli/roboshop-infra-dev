@@ -18,7 +18,7 @@ variable "project_name" {
 }
 
 variable "environment" {
-  default = "DEV"
+  default = "dev"
 }
 
 variable "momgodb_sg_ingress_rules" {
