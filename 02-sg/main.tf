@@ -1,5 +1,5 @@
 module "mongodb" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for momgodb"
@@ -10,7 +10,7 @@ module "mongodb" {
 }
 
 module "vpn" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name   = var.project_name
   environment    = var.environment
   sg_description = "SG for VPN"
@@ -21,7 +21,7 @@ module "vpn" {
 
 
 module "catalogue" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for catalogue"
@@ -32,7 +32,7 @@ module "catalogue" {
 }
 
 module "user" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for user"
@@ -42,7 +42,7 @@ module "user" {
 
 }
 module "cart" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for cart"
@@ -53,7 +53,7 @@ module "cart" {
 }
 
 module "shipping" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for shipping"
@@ -64,7 +64,7 @@ module "shipping" {
 }
 
 module "payment" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for payment"
@@ -75,7 +75,7 @@ module "payment" {
 }
 
 module "redis" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for redis"
@@ -86,7 +86,7 @@ module "redis" {
 }
 
 module "mysql" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for mysql"
@@ -97,7 +97,7 @@ module "mysql" {
 }
 
 module "rabbitmq" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for rabbitmq"
@@ -108,7 +108,7 @@ module "rabbitmq" {
 }
 
 module "web" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for web"
@@ -118,7 +118,7 @@ module "web" {
 
 }
 module "app_alb" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for app alb"
@@ -129,7 +129,7 @@ module "app_alb" {
 }
 
 module "web_alb" {
-  source = "../../terraform_aws_sg"
+  source = "git::https://github.com/rajeshkalavapalli/terraform_aws_sg.git?ref=main"
   project_name = var.project_name
   environment = var.environment
   sg_description = "sg for web alb"
